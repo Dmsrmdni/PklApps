@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PengenalanController;
+use App\Http\Controllers\LatihanController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,11 +42,31 @@ Route::get('/jurusan',function(){
     return view('pages.jurusan');
 });
 
+
+// route parameter
 Route::get('/biodata/{nama}/{umur}/{alamat}/{jenis_kelamin}/{kelas}/{hobby}',function($nama,$umur,$alamat,$jenis_kelamin,$kelas,$hobby){
     return view('pages.biodata', compact('nama','umur','alamat','jenis_kelamin','kelas','hobby'));
 });
 
-Route::get('/pesanan/{makanan?}', function($makanan = "makanan tidak tersedia"){
-    return view('pages.pesanan',compact('makanan'));
+// route optional parameter
+Route::get('/pesanan/{makanan1?}/{makanan2?}', function($makanan1 = "makanan tidak tersedia",$makanan2 = "pesanan tidak tersedia"){
+    return view('pages.pesanan',compact('makanan1','makanan2'));
 });
 
+// passing data dari controller ke view
+Route::get('/pengenalan',[App\Http\Controllers\PengenalanController::class,'pengenalan']);
+
+// passing data dinamis(route parameter) dari controller ke view
+Route::get('/intro/{nama}/{alamat}/{umur}',[PengenalanController::class,'intro']);
+
+Route::get('/siswa/',[PengenalanController::class,'siswa']);
+
+Route::get('/artikel/',[LatihanController::class,'artikel']);
+
+Route::get('/nilai/',[LatihanController::class,'nilai']);
+
+Route::get('/penyiaran/',[LatihanController::class,'penyiaran']);
+
+// Route::get('/post/',[PostController::class,'index']);
+
+Route::resource('/post', PostController::class);

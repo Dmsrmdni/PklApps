@@ -9,7 +9,9 @@
 </head>
 
 <body>
-    <h1>haloo Ini halaman index </h1>
+    nama anda : <strong>{{ $nama }}</strong>
+    <br>
+    umur anda : <strong>{{ $umur }}</strong> Tahun
 </body>
 
 </html>

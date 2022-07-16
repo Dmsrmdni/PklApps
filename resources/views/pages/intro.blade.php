@@ -10,36 +10,20 @@
 
 <body>
     <table>
-        <h2>Biodata</h2>
         <tr>
             <td>Nama</td>
             <td>:</td>
             <td>{{ $nama }}</td>
         </tr>
         <tr>
-            <td>Umur</td>
-            <td>:</td>
-            <td>{{ $umur }}</td>
-        </tr>
-        <tr>
-            <td>Alamat</td>
+            <td>alamat</td>
             <td>:</td>
             <td>{{ $alamat }}</td>
         </tr>
         <tr>
-            <td>Jenis Kelamin</td>
+            <td>umur</td>
             <td>:</td>
-            <td>{{ $jenis_kelamin }}</td>
-        </tr>
-        <tr>
-            <td>Kelas</td>
-            <td>:</td>
-            <td>{{ $kelas }}</td>
-        </tr>
-        <tr>
-            <td>Hobby</td>
-            <td>:</td>
-            <td>{{ $hobby }}</td>
+            <td>{{ $umur }} Tahun</td>
         </tr>
     </table>
 </body>
