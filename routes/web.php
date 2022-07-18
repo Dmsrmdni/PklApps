@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PengenalanController;
 use App\Http\Controllers\LatihanController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\MapelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,3 +74,10 @@ Route::get('/penyiaran/',[LatihanController::class,'penyiaran']);
 // Route::get('/post/',[PostController::class,'index']);
 
 Route::resource('/post', PostController::class);
+
+Route::resource('/latihan', SiswaController::class);
+
+Route::resource('/latihan2', PesertaController::class);
+
+Route::resource('/latihan3', MapelController::class);
+
