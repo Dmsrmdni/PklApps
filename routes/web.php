@@ -7,6 +7,7 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SlotController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,3 +82,8 @@ Route::resource('/latihan2', PesertaController::class);
 Route::resource('/latihan3', MapelController::class);
 
 Route::resource('/practice', PracticeController::class);
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('/slot', SlotController::class);
