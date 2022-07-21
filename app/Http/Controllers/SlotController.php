@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class SlotController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class SlotController extends Controller
      */
     public function index()
     {
-        return 'Ini Halaman index';
+        //menampilkan semua data dari model slot
+        $slot = Slot::all();
+        return view('slot.index', compact('slot'));
     }
 
     /**
@@ -24,7 +31,7 @@ class SlotController extends Controller
      */
     public function create()
     {
-        return 'Ini Halaman create';
+        return view('slot.create');
     }
 
     /**
@@ -35,7 +42,27 @@ class SlotController extends Controller
      */
     public function store(Request $request)
     {
-        return 'Ini Halaman store';
+        //validasi
+        $validated = $request->validate([
+            'nama' => 'required',
+            'nis' => 'required|unique:slots|max:255',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'tanggal_lahir' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        $slot = new Slot();
+        $slot->nama = $request->nama;
+        $slot->nis = $request->nis;
+        $slot->jenis_kelamin = $request->jenis_kelamin;
+        $slot->agama = $request->agama;
+        $slot->tanggal_lahir = $request->tanggal_lahir;
+        $slot->alamat = $request->alamat;
+        $slot->save();
+        return redirect()
+            ->route('slot.index')
+            ->with('success', 'Data berhasil dibuat!');
     }
 
     /**
@@ -44,9 +71,10 @@ class SlotController extends Controller
      * @param  \App\Models\Slot  $slot
      * @return \Illuminate\Http\Response
      */
-    public function show(Slot $slot)
+    public function show($id)
     {
-        return 'Ini Halaman Show';
+        $slot = Slot::findOrFail($id);
+        return view('slot.show', compact('slot'));
     }
 
     /**
@@ -55,9 +83,10 @@ class SlotController extends Controller
      * @param  \App\Models\Slot  $slot
      * @return \Illuminate\Http\Response
      */
-    public function edit(Slot $slot)
+    public function edit($id)
     {
-        return 'Ini Halaman edit';
+        $slot = Slot::findOrFail($id);
+        return view('slot.edit', compact('slot'));
     }
 
     /**
@@ -67,9 +96,29 @@ class SlotController extends Controller
      * @param  \App\Models\Slot  $slot
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Slot $slot)
+    public function update(Request $request, $id)
     {
-        return 'Ini Halaman update';
+        // Validasi
+        $validated = $request->validate([
+            'nama' => 'required',
+            'nis' => 'required|max:255',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'tanggal_lahir' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        $slot = Slot::findOrFail($id);
+        $slot->nama = $request->nama;
+        $slot->nis = $request->nis;
+        $slot->jenis_kelamin = $request->jenis_kelamin;
+        $slot->agama = $request->agama;
+        $slot->tanggal_lahir = $request->tanggal_lahir;
+        $slot->alamat = $request->alamat;
+        $slot->save();
+        return redirect()
+            ->route('slot.index')
+            ->with('success', 'Data berhasil diedit!');
     }
 
     /**
@@ -78,8 +127,12 @@ class SlotController extends Controller
      * @param  \App\Models\Slot  $slot
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Slot $slot)
+    public function destroy($id)
     {
-        return 'Ini Halaman destroy';
+        $slot = Slot::findOrFail($id);
+        $slot->delete();
+        return redirect()
+            ->route('slot.index')
+            ->with('success', 'Data berhasil dihapus!');
     }
 }

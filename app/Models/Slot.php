@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Slot extends Model
 {
     use HasFactory;
+    // field apa saja yang bisa di isi
+    public $fillable = ['nama', 'nis', 'agama', 'jenis_kelamin', 'alamat', 'tanggal_lahir'];
+    // membuat fitur created_at(kapan data dibuat) & updated_at (kapan data diedit)
+
+    public $timestamps = true;
 }

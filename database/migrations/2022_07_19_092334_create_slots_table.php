@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('slots', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('nis')->unique();
+            $table->string('jenis_kelamin');
+            $table->string('agama');
+            $table->date('tanggal_lahir');
+            $table->text('alamat');
             $table->timestamps();
         });
     }

@@ -26,9 +26,8 @@ Route::get('/', function () {
 });
 
 Route::get('/belajar', function () {
-    echo "<center><h1><u>Halo semuanya</u></h1>";
-    echo "<h3><u>kami sedang belajar laravel dasar</h3></u></center>";
-
+    echo '<center><h1><u>Halo semuanya</u></h1>';
+    echo '<h3><u>kami sedang belajar laravel dasar</h3></u></center>';
 });
 
 Route::get('/home', function () {
@@ -53,7 +52,7 @@ Route::get('/biodata/{nama}/{umur}/{alamat}/{jenis_kelamin}/{kelas}/{hobby}', fu
 });
 
 // route optional parameter
-Route::get('/pesanan/{makanan1?}/{makanan2?}', function ($makanan1 = "makanan tidak tersedia", $makanan2 = "pesanan tidak tersedia") {
+Route::get('/pesanan/{makanan1?}/{makanan2?}', function ($makanan1 = 'makanan tidak tersedia', $makanan2 = 'pesanan tidak tersedia') {
     return view('pages.pesanan', compact('makanan1', 'makanan2'));
 });
 
@@ -84,6 +83,7 @@ Route::resource('/latihan3', MapelController::class);
 Route::resource('/practice', PracticeController::class);
 
 Auth::routes();
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/slot', SlotController::class);
